@@ -1,25 +1,66 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { Layout, Typography, Space } from "antd";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import {
+  Exchanges,
+  Homepage,
+  News,
+  Cryptocurrencies,
+  CryptoDetails,
+  Navbar,
+} from "./components";
+
+import "./App.css";
+
+const App = () => (
+  <BrowserRouter>
+    <div className="app">
+      <Navbar />
+
+      <div className="main">
+        <Layout className="BG1">
+          <div className="routes">
+            <Routes>
+              <Route exact path="/" element={<Homepage />} />
+              <Route path="/exchanges" element={<Exchanges />} />
+              <Route
+                exact
+                path="/cryptocurrencies"
+                element={<Cryptocurrencies />}
+              />
+              <Route exact path="/crypto/:coinId" element={<CryptoDetails />} />
+              <Route exact path="/news" element={<News />} />
+            </Routes>
+          </div>
+        </Layout>
+        <div className="footer">
+          <Typography.Title
+            level={5}
+            style={{ color: "white", textAlign: "center" }}
+          >
+            Copyright © 2021
+            <Link to="/" className="text-light">
+              Cryptoverse Inc.
+            </Link>{" "}
+            <br />
+            All Rights Reserved.
+          </Typography.Title>
+          <Space>
+            <Link to="/" className="text-light">
+              Home
+            </Link>
+            <Link to="/exchanges" className="text-light">
+              Exchanges
+            </Link>
+            <Link to="/news" className="text-light">
+              News
+            </Link>
+          </Space>
+        </div>
+      </div>
     </div>
-  );
-}
+  </BrowserRouter>
+);
 
 export default App;
